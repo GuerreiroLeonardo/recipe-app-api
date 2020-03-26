@@ -1,0 +1,3 @@
+django>=3.0.4,<3.1.0 #The minor version *.*.4 geralmente não muda muito de uma pra outra, 
+                    #no entanto queremos que nossa versão tenha as features de segurança mais atuais
+djangorestframework>=3.11.0,<3.12.0

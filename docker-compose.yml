@@ -1,0 +1,16 @@
+version: "3"
+
+services: 
+    app:  #The name of our service
+        build: # Build section
+            context: .  #Current directory the we are running docker compose from
+        ports: 
+            - "8000:8000" #map our project from port 8000 on our host to port 8000 in our image
+        volumes:
+            - ./app:/app 
+                #allow us to get the update to our project into our docker image in real time
+                #That is whenever you change something on the project it will be auto update into the container
+        command: > #The command that we are gonna use to run our application
+            sh -c "python manage.py runserver 0.0.0.0:8000" 
+        #Run the command using shell the django development server available in all IP's address that run on the docker container
+        #
