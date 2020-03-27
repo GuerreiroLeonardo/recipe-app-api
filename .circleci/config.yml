@@ -1,21 +1,11 @@
-version: 2.1
+language: python
+python:
+    - "3.8"
 
-orbs:
-  python: circleci/python@0.2.1
+services:
+    - docker
 
-jobs:
-  build-and-test:
-    executor: python/default
-    steps:
-      - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
-      - run:
-          command: ./manage.py test
-          name: Test
+before_script: pip install docker-compose
 
-workflows:
-  main:
-    jobs:
-      - build-and-test
+script:
+    - docker-compose run  app sh -c "python manage.py test && flake8"
