@@ -2,6 +2,7 @@ version: "3"
 
 services: 
     app:  #The name of our service
+        user: $UID:$GID
         build: # Build section
             context: .  #Current directory the we are running docker compose from
         ports: 
