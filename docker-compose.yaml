@@ -12,6 +12,22 @@ services:
                 #allow us to get the update to our project into our docker image in real time
                 #That is whenever you change something on the project it will be auto update into the container
         command: > #The command that we are gonna use to run our application
-            sh -c "python manage.py runserver 0.0.0.0:8000" 
+            sh -c "python manage.py wait_for_db && 
+                   python manage.py migrate &&
+                   python manage.py runserver 0.0.0.0:8000" 
         #Run the command using shell the django development server available in all IP's address that run on the docker container
         #
+        environment: 
+            - DB_HOST=db
+            - DB_NAME=app
+            - DB_USER=postgres
+            - DB_PASS=supersecretpassword
+        depends_on: 
+            - db  #it can have another dependencies
+            
+    db:
+        image: postgres:10-alpine
+        environment: 
+            - POSTGRES_DB=app
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=supersecretpassword
