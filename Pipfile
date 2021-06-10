@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 djangorestframework = "<3.12.0,>=3.11.0"
 flake8 = ">=3.6.0,<3.7.0"
-Django = "<3.1.0,>=3.0.4"
+Django = ">=3.0.4,<3.2.0"
 
 [requires]
 python_version = "3.6"
